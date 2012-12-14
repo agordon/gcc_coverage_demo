@@ -27,9 +27,20 @@ testhigh: run_tests.sh conv
 testmax: run_tests.sh conv
 	./run_tests.sh max
 
+conv.gcno conv.gcda:
+	@echo "Error: can't generate coverage report without running some tests first".
+	@echo "Please run:"
+	@echo "   make testlow"
+	@echo " or"
+	@echo "   make testhigh"
+	@echo " or"
+	@echo "   make testmax"
+	@echo ""
+	@echo "To generate coverage information"
+	@exit 1
 
 ## generate coverage
-cov: conv conv.gcno cov.gcda
+cov: conv conv.gcno conv.gcda
 	lcov --test-name conv_test --quiet \
 		--directory `pwd` \
 		--base-directory `pwd` \
