@@ -1,0 +1,12 @@
+README.html
+
+# compiled binary
+conv
+
+# coverage files
+conv.gcno
+conv.gcda
+conv.lcov
+
+# coverage report
+lcov-html
