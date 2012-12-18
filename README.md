@@ -116,7 +116,7 @@ Technical Details
 - **Compilation Flags** - see `CFLAGS` in `Makefile` .
     Also see [GCC Debugging Options](http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html#index-fprofile_002darcs-577) .
 
-- **LCOV Usage** - see `cov:` target in `Makefile` .
+- **LCOV Usage** - see `cov:` target in `Makefile` and [The LCOV Homepage](http://ltp.sourceforge.net/coverage/lcov.php).
 
 - `conv.gcno` and `conv.gcda` - The generated coverage data files, see details
     at the [gcov website](http://gcc.gnu.org/onlinedocs/gcc/Gcov-Data-Files.html#Gcov-Data-Files).
@@ -129,6 +129,8 @@ Contact
 -------
 
 Assaf Gordon ( assafgordon at gmail dot com )
+
+Git Repository: [agordon/gcc_coverage_demo](https://github.com/agordon/gcc_coverage_demo) on GitHub.
 
 
 License
