@@ -14,20 +14,23 @@ all: conv
 
 conv: conv.c
 
+clean_cov:
+	@rm -f conv.gcda
+
 clean:
 	@rm -rf conv conv.gcda conv.gcno *.lcov lcov-html
 
 ## run some tests
-testlow: run_tests.sh conv
+testlow: run_tests.sh conv clean_cov
 	./run_tests.sh low
 
-testhigh: run_tests.sh conv
+testhigh: run_tests.sh conv clean_cov
 	./run_tests.sh high
 
-testmax: run_tests.sh conv
+testmax: run_tests.sh conv clean_cov
 	./run_tests.sh max
 
-conv.gcno conv.gcda:
+conv.gcda:
 	@echo "Error: can't generate coverage report without running some tests first".
 	@echo "Please run:"
 	@echo "   make testlow"
@@ -40,7 +43,7 @@ conv.gcno conv.gcda:
 	@exit 1
 
 ## generate coverage
-cov: conv conv.gcno conv.gcda
+cov: conv conv.gcda
 	lcov --test-name conv_test --quiet \
 		--directory `pwd` \
 		--base-directory `pwd` \
