@@ -11,18 +11,35 @@
 #include <errno.h>
 #include <getopt.h>
 #include <limits.h>
+#include <math.h>
 
 enum conv_type
 {
 	USE_NONE,
 	USE_DOUBLE,
-	USE_LONG
+	USE_LONG,
+	USE_HUMAN
 };
 
-long double safe_string_to_double(const char* str)
+int suffix_power(const char suf)
+{
+	switch (suf)
+	{
+	case 'K': return 1;
+	case 'M': return 2;
+	case 'G': return 3;
+	case 'T': return 4;
+	case 'P': return 5;
+	default: return -1;
+	}
+}
+
+long double safe_string_to_double(const char* str, int allow_human_suffix)
 {
 	char *endptr;
 	long double d;
+	int power=0;
+	int base=1000;
 
 	errno = 0;    /* To distinguish success/failure after call */
 	d = strtod(str, &endptr);
@@ -43,8 +60,24 @@ long double safe_string_to_double(const char* str)
 	if (endptr == str)
 		errx(1, "No digits were found in '%s'", str);
 
-	if (*endptr != '\0')
-	        errx(1, "Extra characters found: '%s'", endptr);
+	if (*endptr != '\0') {
+		if (!allow_human_suffix)
+			errx(1, "Extra characters found: '%s'", endptr);
+
+		power = suffix_power(*endptr);
+		if (power==-1)
+			errx(1, "Invalid suffix: '%c'", *endptr);
+		endptr++;
+
+		if (*endptr=='i') {
+			++endptr;
+			base = 1024;
+		}
+		d = d * powl(base,power);
+
+		if (*endptr != '\0')
+			errx(1, "Extra characters found: '%s'", endptr);
+	}
 
 	return d;
 }
@@ -86,7 +119,7 @@ int main(int argc, char* argv[])
 	enum conv_type ct = USE_NONE ;
 	int c;
 
-	while ( (c=getopt(argc,argv,"dl"))!= -1 )
+	while ( (c=getopt(argc,argv,"hdl"))!= -1 )
 	{
 		switch(c)
 		{
@@ -97,6 +130,11 @@ int main(int argc, char* argv[])
 		case 'l':
 			ct = USE_LONG;
 			break;
+
+		case 'h':
+			ct = USE_HUMAN;
+			break;
+
 		default:
 			errx(1,"unknown command-line option '%c'",c);
 			break;
@@ -117,8 +155,9 @@ int main(int argc, char* argv[])
 
 		switch (ct)
 		{
+		case USE_HUMAN:
 		case USE_DOUBLE:
-			d = safe_string_to_double(str);
+			d = safe_string_to_double(str,(ct==USE_HUMAN));
 			printf("%Lf\n", d);
 			break;
 

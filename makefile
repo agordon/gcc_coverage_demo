@@ -8,7 +8,7 @@
 
 CFLAGS=-O0 -Wall -Wextra -g -fprofile-arcs -ftest-coverage -std=c99
 CC=gcc
-LDFLAGS=
+LDFLAGS=-lm
 
 all: conv
 

@@ -53,7 +53,7 @@ run, profiling/coverage information is added to files on disk (`conv.gc??`).
     3. To run a "high" tests suite, run `make testhigh`.
        The tests will only cover most of the control path in the program,
        resulting in *high* coverage report.
-    3. To run a a *good* tests suite, run `make testmax`.
+    3. To run the *maximum* tests suite, run `make testmax`.
        All the possible control paths in the program will be covered,
        resulting in *good* coverage report.
        **NOTE:** some control paths in the program can not be tested at all.

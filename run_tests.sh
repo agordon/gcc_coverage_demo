@@ -32,6 +32,12 @@ $PROG -l 546 > /dev/null 2>/dev/null
 if [ "$TYPE" = "high" -o "$TYPE" = "max" ]; then
 	# test many more cases, covering as many lines and branches as possible.
 
+	# Test 'human' suffix
+	$PROG -h '3K' > /dev/null 2>/dev/null
+	$PROG -h '4.5T' > /dev/null 2>/dev/null
+	$PROG -h '3Q' > /dev/null 2>/dev/null
+	$PROG -h '3Gi' > /dev/null 2>/dev/null
+
 	# trigger 'extra characters'
 	$PROG -d "3K" > /dev/null 2>/dev/null
 	$PROG -l "3K" > /dev/null 2>/dev/null
@@ -59,6 +65,12 @@ if [ "$TYPE" = "max" ]; then
 
 	# missing values
 	$PROG -l > /dev/null 2>/dev/null
+
+	# Test all human suffixes
+	$PROG -h '9M' > /dev/null 2>/dev/null
+	$PROG -h '1P' > /dev/null 2>/dev/null
+	# Extra characters after 'human' suffix
+	$PROG -h '3KK' > /dev/null 2>/dev/null
 
 fi
 
