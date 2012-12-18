@@ -5,6 +5,7 @@
 # *
 # * See README.md file for details.
 # */
+PMCCABE := $(shell which pmccabe)
 
 CFLAGS=-O0 -Wall -Wextra -g -fprofile-arcs -ftest-coverage -std=c99
 CC=gcc
@@ -57,3 +58,29 @@ cov: conv conv.gcda
 	@echo "Coverage report:"
 	@echo "   $(PWD)/lcov-html/index.html"
 	@echo
+
+have_pmccabe:
+ifeq ($(PMCCABE),)
+	$(error The program 'pmccabe' is not installed)
+endif
+
+mccabe: have_pmccabe conv.c
+	@pmccabe -v -c conv.c
+
+mccabe10: have_pmccabe conv.c
+	@echo ""
+	@echo "The following functions have McCabe complexity>=10"
+	@echo ""
+	@echo "Cmplx	File(line): Function"
+	@( pmccabe -c conv.c | awk '$$1>=10' | cut -f1,6- )
+	@echo "-End Of List-"
+	@echo ""
+
+toolong: have_pmccabe conv.c
+	@echo ""
+	@echo "The following functions are longer than 35 lines."
+	@echo ""
+	@echo "Lines	File(line): Function"
+	@( pmccabe -c conv.c | awk '$$5>35' | cut -f5- )
+	@echo "-End Of List-"
+	@echo ""
