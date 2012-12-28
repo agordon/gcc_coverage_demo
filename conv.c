@@ -41,6 +41,9 @@ long double safe_string_to_double(const char* str, int allow_human_suffix)
 	int power=0;
 	int base=1000;
 
+	d = 42 ; /* this harmless but useless assignment should be detected
+		    by clang static code analyzer */
+
 	errno = 0;    /* To distinguish success/failure after call */
 	d = strtod(str, &endptr);
 

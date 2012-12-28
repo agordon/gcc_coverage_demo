@@ -1,8 +1,12 @@
 Coverage and Code-Complexity example
 ====================================
 
-This tiny project demonstrage the use of GCC's coverage facility, and the `lcov`
-coverage report program, and McCabe complexity of a C program.
+This tiny project demonstrage the use of several quality-control tools:
+
+1. GCC's code coverage facility
+2. The `lcov` coverage report program
+3. McCabe complexity of a C program
+4. llvm/clang static code analyzer
 
 TL;DR
 -----
@@ -14,6 +18,9 @@ TL;DR
     # Generate coverage report
     make cov
     # View coverage report: ./lcov-html/index.html
+
+    # Use CLANG static code analyzer to find errors
+    make static-check
 
     # See McCabe complexity for each function
     make mccabe
@@ -32,6 +39,8 @@ Requirements
 - `gcc`  - to compile the program.
 - `lcov` - to generate coverage reports.
 - `pmccabe` - (optional) to compute McCabe complexity
+- `clang` - (optional) to use clang static code analyzer (tested with clang 3.3)
+- `scan-build` - (optional) clang static code analyzer
 
 Project Files
 -------------
@@ -108,6 +117,24 @@ run, profiling/coverage information is added to files on disk (`conv.gc??`).
         48     conv.c(117): main
         -End Of List-
 
+7. Run `make static-check` to generate HTML report for bugs detected with clang's
+   static code analyzer.
+
+        $ make static-check
+        /home/gordon/sources/llvm/checker-269/scan-build -o static \
+                --use-cc=/usr/local/bin/clang \
+                --use-analyzer=/usr/local/bin/clang \
+                     /usr/local/bin/clang -o conv conv.c -lm
+        scan-build: Using '/usr/local/bin/clang-3.3' for static analysis
+        conv.c:44:2: warning: Value stored to 'd' is never read
+                d = 42 ; /* this harmless but useless assignment should be detected
+                ^   ~~
+        1 warning generated.
+        scan-build: 1 bugs found.
+        scan-build: Run 'scan-view /home/gordon/projects/lcov_learn/static/2012-12-28-1' to examine bug reports.
+        
+        Check the above mention directory (in ./static/) for the bug report
+        
 
 
 Technical Details
@@ -123,6 +150,98 @@ Technical Details
 
 - **McCabe Complexity** - see [PMCCABE Home Page](http://www.parisc-linux.org/~bame/pmccabe/overview.html) and
   [Cyclomatic complexity (wikipedia)](http://en.wikipedia.org/wiki/Cyclomatic_complexity)
+
+- **llvm/clang** - Alternative compiler to GCC.
+  See installation instructions below.
+
+- **clang static code analyzer** - [](http://clang-analyzer.llvm.org/).
+  See installation instructions below.
+
+
+Installing LLVm/CLANG
+---------------------
+
+Not full instructions, just a quick reference. More information [here](http://www.llvm.org/docs/CMake.html)
+
+** Installing building latest LLVM/CLANG **
+
+Instead of using the official SVN repository, use the github mirror.
+
+    # we'll call this <base> from now on
+    $ mkdir /base/directory/of/llvm_src
+    $ cd <base>
+
+    # Get the base llvm tools
+    $ git clone https://github.com/llvm-mirror/llvm.git
+
+    # Add the clang tool
+    $ cd <base>/llvm/tools
+    $ git clone https://github.com/llvm-mirror/clang.git
+
+    # Add the replacement Standard C++ library
+    $ cd <base>/llvm/tools
+    $ git clone https://github.com/llvm-mirror/libcxx.git
+
+    # Add the compiler-rt project
+    $ cd <base>/llvm/projects
+    $ git clone https://github.com/llvm-mirror/compiler-rt.git
+
+    # Add the test-suite
+    $ cd <base>/llvm/projects
+    $ git clone https://github.com/llvm-mirror/test-suite.git
+
+    # **TODO**: how to add lldb?
+
+    # Build llvm/clang
+    $ cd <base>
+    $ mkdir build
+    $ cd build
+
+    # Prepare out-of-tree build
+    # more build options: http://www.llvm.org/docs/CMake.html#llvm-specific-variables
+    $ cmake ../llvm -DLLVM_TARGETS_TO_BUILD=X86
+
+    # Build
+    $ make -j 4
+
+    # Install
+    $ sudo make install
+
+
+**Installing CLANG static code analyzer**
+
+Website: http://clang-analyzer.llvm.org/
+
+Installation on Linux:
+
+1. Install llvm+clang
+2. Download latest static checker:
+
+        $ wget http://bit.ly/USf8ge
+        $ tar -xjvf Checker-269.tar.bz2
+
+3. The checker is mostly perl/python scripts, so no need to install anything
+4. The checker comes with a Mac-OSX clang binary, delete it:
+
+        $ rm checker-269/bin/clang*
+
+5. Ensure 'clang' is on your path:
+
+        $ which clang
+        /usr/local/bin/clang
+
+6. Add Static Checker to the path
+
+        $ export PATH=/home/gordon/sources/llvm/checker-269/:$PATH
+        $ which scan-build
+        /home/gordon/sources/llvm/checker-269/scan-build
+
+To build an autotools project with scan-build, do the following
+
+    $ scan-build -v -o check --use-cc=/usr/local/bin/clang --use-analyzer=/usr/local/bin/clang ./configure
+    $ scan-build -v -o check --use-cc=/usr/local/bin/clang --use-analyzer=/usr/local/bin/clang make
+
+The "check" directory should contain HTML bug reports.
 
 
 Contact

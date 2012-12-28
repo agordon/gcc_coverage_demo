@@ -5,6 +5,9 @@
 # *
 # * See README.md file for details.
 # */
+CLANG := $(shell which clang)
+SCANBUILD := $(shell which scan-build)
+SCANBUILD_MIN_VER=269
 PMCCABE := $(shell which pmccabe)
 
 CFLAGS=-O0 -Wall -Wextra -g -fprofile-arcs -ftest-coverage -std=c99
@@ -16,10 +19,15 @@ all: conv
 conv: conv.c
 
 clean_cov:
-	@rm -f conv.gcda
+	@rm -rf conv.gcda *.lcov lcov-html
 
-clean:
-	@rm -rf conv conv.gcda conv.gcno *.lcov lcov-html
+clean_static:
+	@rm -rf ./static
+
+clean_build:
+	@rm -rf conv conv.gcno
+
+clean: clean_cov clean_static clean_build
 
 ## run some tests
 testlow: run_tests.sh conv clean_cov
@@ -83,4 +91,24 @@ toolong: have_pmccabe conv.c
 	@echo "Lines	File(line): Function"
 	@( pmccabe -c conv.c | awk '$$5>35' | cut -f5- )
 	@echo "-End Of List-"
+	@echo ""
+
+have_clang:
+ifeq ($(CLANG),)
+	$(error The program 'clang' is not installed)
+endif
+
+have_scan_build:
+ifeq ($(SCANBUILD),)
+	$(error The program 'scan-build' is not installed)
+endif
+	@$(SCANBUILD) --help | \
+		grep '^ANALYZER BUILD:' | \
+		perl -ne '/checker-(\d+)/; die "Error: need scan-build version>=$(SCANBUILD_MIN_VER)" unless $$1>=$(SCANBUILD_MIN_VER);'
+
+static-check: clean have_clang have_scan_build conv.c
+	$(SCANBUILD) -o static --use-cc=$(CLANG) --use-analyzer=$(CLANG) \
+		$(CLANG) -o conv conv.c $(LDFLAGS)
+	@echo ""
+	@echo "Check the above mention directory (in ./static/) for the bug report"
 	@echo ""

@@ -10,3 +10,6 @@ conv.lcov
 
 # coverage report
 lcov-html
+
+# static code analyzer reports
+static/
