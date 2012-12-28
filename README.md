@@ -3,10 +3,10 @@ Coverage and Code-Complexity example
 
 This tiny project demonstrage the use of several quality-control tools:
 
-1. GCC's code coverage facility
-2. The `lcov` coverage report program
-3. McCabe complexity of a C program
-4. llvm/clang static code analyzer
+1. GCC's code coverage facility 
+2. The `lcov` coverage report program ([Example](./examples/conv.c.gcov.html))
+3. McCabe complexity of a C program ([Example](./examples/mccabe.txt))
+4. llvm/clang static code analyzer ([Example](./examples/report-static-check.html#EndPath))
 
 TL;DR
 -----
@@ -55,6 +55,9 @@ Project Files
 
 - `README.md` - This file.
 
+- `examples/conv.c.gcov.html` - Sample HTML report from `lcov`, showing low coverage.
+
+- `examples/report-static-check.html` - Sample HTML report from `scan-build`, showing a possible bug.
 
 
 Usage
@@ -78,7 +81,9 @@ run, profiling/coverage information is added to files on disk (`conv.gc??`).
        **NOTE:** some control paths in the program can not be tested at all.
        See source code for details.
 
-3. Run `make cov` to generate the coverage report. The HTML report is stored in `./lcov-html/index.html`
+3. Run `make cov` to generate the coverage report.
+   The HTML report is stored in `./lcov-html/index.html`.
+   See [Example Report](./examples/conv.c.gcov.html).
 
 4. Run `make mccabe` to compute McCabe complexity of each function in `conv.c`
 
@@ -118,7 +123,7 @@ run, profiling/coverage information is added to files on disk (`conv.gc??`).
         -End Of List-
 
 7. Run `make static-check` to generate HTML report for bugs detected with clang's
-   static code analyzer.
+   static code analyzer. See [Example Report](./examples/report-static-check.html#EndPath).
 
         $ make static-check
         /home/gordon/sources/llvm/checker-269/scan-build -o static \
@@ -135,7 +140,7 @@ run, profiling/coverage information is added to files on disk (`conv.gc??`).
         
         Check the above mention directory (in ./static/) for the bug report
         
-
+   
 
 Technical Details
 -----------------

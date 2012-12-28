@@ -1,0 +1,11 @@
+Modified McCabe Cyclomatic Complexity
+|   Traditional McCabe Cyclomatic Complexity
+|       |    # Statements in function
+|       |        |   First line of function
+|       |        |       |   # uncommented nonblank lines in function
+|       |        |       |       |  filename(definition line number):function
+|       |        |       |       |           |
+2	6	6	24	12	conv.c(24): suffix_power
+10	10	25	37	31	conv.c(37): safe_string_to_double
+8	8	12	88	16	conv.c(88): safe_string_to_long
+7	12	29	120	48	conv.c(120): main

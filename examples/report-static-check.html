@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+<head>
+<title>conv.c</title>
+<style type="text/css">
+ body { color:#000000; background-color:#ffffff }
+ body { font-family:Helvetica, sans-serif; font-size:10pt }
+ h1 { font-size:14pt }
+ .code { border-collapse:collapse; width:100%; }
+ .code { font-family: "Monospace", monospace; font-size:10pt }
+ .code { line-height: 1.2em }
+ .comment { color: green; font-style: oblique }
+ .keyword { color: blue }
+ .string_literal { color: red }
+ .directive { color: darkmagenta }
+ .expansion { display: none; }
+ .macro:hover .expansion { display: block; border: 2px solid #FF0000; padding: 2px; background-color:#FFF0F0; font-weight: normal;   -webkit-border-radius:5px;  -webkit-box-shadow:1px 1px 7px #000; position: absolute; top: -1em; left:10em; z-index: 1 } 
+ .macro { color: darkmagenta; background-color:LemonChiffon; position: relative }
+ .num { width:2.5em; padding-right:2ex; background-color:#eeeeee }
+ .num { text-align:right; font-size:8pt }
+ .num { color:#444444 }
+ .line { padding-left: 1ex; border-left: 3px solid #ccc }
+ .line { white-space: pre }
+ .msg { -webkit-box-shadow:1px 1px 7px #000 }
+ .msg { -webkit-border-radius:5px }
+ .msg { font-family:Helvetica, sans-serif; font-size:8pt }
+ .msg { float:left }
+ .msg { padding:0.25em 1ex 0.25em 1ex }
+ .msg { margin-top:10px; margin-bottom:10px }
+ .msg { font-weight:bold }
+ .msg { max-width:60em; word-wrap: break-word; white-space: pre-wrap }
+ .msgT { padding:0x; spacing:0x }
+ .msgEvent { background-color:#fff8b4; color:#000000 }
+ .msgControl { background-color:#bbbbbb; color:#000000 }
+ .mrange { background-color:#dfddf3 }
+ .mrange { border-bottom:1px solid #6F9DBE }
+ .PathIndex { font-weight: bold; padding:0px 5px; margin-right:5px; }
+ .PathIndex { -webkit-border-radius:8px }
+ .PathIndexEvent { background-color:#bfba87 }
+ .PathIndexControl { background-color:#8c8c8c }
+ .PathNav a { text-decoration:none; font-size: larger }
+ .CodeInsertionHint { font-weight: bold; background-color: #10dd10 }
+ .CodeRemovalHint { background-color:#de1010 }
+ .CodeRemovalHint { border-bottom:1px solid #6F9DBE }
+ table.simpletable {
+   padding: 5px;
+   font-size:12pt;
+   margin:20px;
+   border-collapse: collapse; border-spacing: 0px;
+ }
+ td.rowname {
+   text-align:right; font-weight:bold; color:#444444;
+   padding-right:2ex; }
+</style>
+</head>
+<body>
+<!-- BUGDESC Value stored to 'd' is never read -->
+
+<!-- BUGTYPE Dead assignment -->
+
+<!-- BUGCATEGORY Dead store -->
+
+<!-- BUGFILE /home/gordon/projects/lcov_learn/conv.c -->
+
+<!-- BUGLINE 44 -->
+
+<!-- BUGPATHLENGTH 1 -->
+
+<!-- BUGMETAEND -->
+<!-- REPORTHEADER -->
+<h3>Bug Summary</h3>
+<table class="simpletable">
+<tr><td class="rowname">File:</td><td>conv.c</td></tr>
+<tr><td class="rowname">Location:</td><td><a href="#EndPath">line 44, column 2</a></td></tr>
+<tr><td class="rowname">Description:</td><td>Value stored to 'd' is never read</td></tr>
+</table>
+<!-- REPORTSUMMARYEXTRA -->
+<h3>Annotated Source Code</h3>
+<table class="code">
+<tr><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/* GCC+Coverage demo.</span></td></tr>
+<tr><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>* Copyright 2012 (C) Assaf Gordon</span></td></tr>
+<tr><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* License: AGPLv3+</span></td></tr>
+<tr><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>* See README.md file for details.</span></td></tr>
+<tr><td class="num" id="LN7">7</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr><td class="num" id="LN8">8</td><td class="line"><span class='directive'>#include &lt;stdlib.h&gt;</span></td></tr>
+<tr><td class="num" id="LN9">9</td><td class="line"><span class='directive'>#include &lt;stdio.h&gt;</span></td></tr>
+<tr><td class="num" id="LN10">10</td><td class="line"><span class='directive'>#include &lt;err.h&gt;</span></td></tr>
+<tr><td class="num" id="LN11">11</td><td class="line"><span class='directive'>#include &lt;<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span>.h&gt;</span></td></tr>
+<tr><td class="num" id="LN12">12</td><td class="line"><span class='directive'>#include &lt;getopt.h&gt;</span></td></tr>
+<tr><td class="num" id="LN13">13</td><td class="line"><span class='directive'>#include &lt;limits.h&gt;</span></td></tr>
+<tr><td class="num" id="LN14">14</td><td class="line"><span class='directive'>#include &lt;math.h&gt;</span></td></tr>
+<tr><td class="num" id="LN15">15</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN16">16</td><td class="line"><span class='keyword'>enum</span> conv_type</td></tr>
+<tr><td class="num" id="LN17">17</td><td class="line">{</td></tr>
+<tr><td class="num" id="LN18">18</td><td class="line">	USE_NONE,</td></tr>
+<tr><td class="num" id="LN19">19</td><td class="line">	USE_DOUBLE,</td></tr>
+<tr><td class="num" id="LN20">20</td><td class="line">	USE_LONG,</td></tr>
+<tr><td class="num" id="LN21">21</td><td class="line">	USE_HUMAN</td></tr>
+<tr><td class="num" id="LN22">22</td><td class="line">};</td></tr>
+<tr><td class="num" id="LN23">23</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN24">24</td><td class="line"><span class='keyword'>int</span> suffix_power(<span class='keyword'>const</span> <span class='keyword'>char</span> suf)</td></tr>
+<tr><td class="num" id="LN25">25</td><td class="line">{</td></tr>
+<tr><td class="num" id="LN26">26</td><td class="line">	<span class='keyword'>switch</span> (suf)</td></tr>
+<tr><td class="num" id="LN27">27</td><td class="line">	{</td></tr>
+<tr><td class="num" id="LN28">28</td><td class="line">	<span class='keyword'>case</span> 'K': <span class='keyword'>return</span> 1;</td></tr>
+<tr><td class="num" id="LN29">29</td><td class="line">	<span class='keyword'>case</span> 'M': <span class='keyword'>return</span> 2;</td></tr>
+<tr><td class="num" id="LN30">30</td><td class="line">	<span class='keyword'>case</span> 'G': <span class='keyword'>return</span> 3;</td></tr>
+<tr><td class="num" id="LN31">31</td><td class="line">	<span class='keyword'>case</span> 'T': <span class='keyword'>return</span> 4;</td></tr>
+<tr><td class="num" id="LN32">32</td><td class="line">	<span class='keyword'>case</span> 'P': <span class='keyword'>return</span> 5;</td></tr>
+<tr><td class="num" id="LN33">33</td><td class="line">	<span class='keyword'>default</span>: <span class='keyword'>return</span> -1;</td></tr>
+<tr><td class="num" id="LN34">34</td><td class="line">	}</td></tr>
+<tr><td class="num" id="LN35">35</td><td class="line">}</td></tr>
+<tr><td class="num" id="LN36">36</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN37">37</td><td id="EndPath" class="line"><span class='keyword'>long</span> <span class='keyword'>double</span> safe_string_to_double(<span class='keyword'>const</span> <span class='keyword'>char</span>* str, <span class='keyword'>int</span> allow_human_suffix)</td></tr>
+<tr><td class="num" id="LN38">38</td><td class="line">{</td></tr>
+<tr><td class="num" id="LN39">39</td><td class="line">	<span class='keyword'>char</span> *endptr;</td></tr>
+<tr><td class="num" id="LN40">40</td><td class="line">	<span class='keyword'>long</span> <span class='keyword'>double</span> d;</td></tr>
+<tr><td class="num" id="LN41">41</td><td class="line">	<span class='keyword'>int</span> power=0;</td></tr>
+<tr><td class="num" id="LN42">42</td><td class="line">	<span class='keyword'>int</span> base=1000;</td></tr>
+<tr><td class="num" id="LN43">43</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN44">44</td><td class="line">	d = <span class="mrange">42</span> ; <span class='comment'>/* this harmless but useless assignment should be detected</span></td></tr>
+<tr><td class="num"></td><td class="line"><div class="msg msgEvent" style="margin-left:9ex">Value stored to 'd' is never read</div></td></tr>
+<tr><td class="num" id="LN45">45</td><td class="line">		    <span class='comment'>by clang static code analyzer */</span></td></tr>
+<tr><td class="num" id="LN46">46</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN47">47</td><td class="line">	<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span> = 0;    <span class='comment'>/* To distinguish success/failure after call */</span></td></tr>
+<tr><td class="num" id="LN48">48</td><td class="line">	d = strtod(str, &amp;endptr);</td></tr>
+<tr><td class="num" id="LN49">49</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN50">50</td><td class="line">	<span class='comment'>/* Coverage note: This 2-line "if" statement has multiple conditions</span></td></tr>
+<tr><td class="num" id="LN51">51</td><td class="line">	 <span class='comment'>* (=branches). Not all of them can be ever tested in this situation.</span></td></tr>
+<tr><td class="num" id="LN52">52</td><td class="line">	 <span class='comment'>* For example:</span></td></tr>
+<tr><td class="num" id="LN53">53</td><td class="line">	 <span class='comment'>*  It is unclear if a "libc" implementation of "strtod"</span></td></tr>
+<tr><td class="num" id="LN54">54</td><td class="line">	 <span class='comment'>*  returns errors other than ERANGE.</span></td></tr>
+<tr><td class="num" id="LN55">55</td><td class="line">	 <span class='comment'>*  This error checking code is based on the linux man-page</span></td></tr>
+<tr><td class="num" id="LN56">56</td><td class="line">	 <span class='comment'>*  if stdtod(3) - we keep it here for completeness,</span></td></tr>
+<tr><td class="num" id="LN57">57</td><td class="line">	 <span class='comment'>*  but this will reduce the maximum possible coverage.</span></td></tr>
+<tr><td class="num" id="LN58">58</td><td class="line">	 <span class='comment'>*  */</span></td></tr>
+<tr><td class="num" id="LN59">59</td><td class="line">	<span class='keyword'>if</span> ((<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span> == <span class='macro'>ERANGE<span class='expansion'>34</span></span>)</td></tr>
+<tr><td class="num" id="LN60">60</td><td class="line">			|| (<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span> != 0 &amp;&amp; d == 0))</td></tr>
+<tr><td class="num" id="LN61">61</td><td class="line">		err(1,<span class='string_literal'>"strtod('%s') failed:"</span>, str);</td></tr>
+<tr><td class="num" id="LN62">62</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN63">63</td><td class="line">	<span class='keyword'>if</span> (endptr == str)</td></tr>
+<tr><td class="num" id="LN64">64</td><td class="line">		errx(1, <span class='string_literal'>"No digits were found in '%s'"</span>, str);</td></tr>
+<tr><td class="num" id="LN65">65</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN66">66</td><td class="line">	<span class='keyword'>if</span> (*endptr != '\0') {</td></tr>
+<tr><td class="num" id="LN67">67</td><td class="line">		<span class='keyword'>if</span> (!allow_human_suffix)</td></tr>
+<tr><td class="num" id="LN68">68</td><td class="line">			errx(1, <span class='string_literal'>"Extra characters found: '%s'"</span>, endptr);</td></tr>
+<tr><td class="num" id="LN69">69</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN70">70</td><td class="line">		power = suffix_power(*endptr);</td></tr>
+<tr><td class="num" id="LN71">71</td><td class="line">		<span class='keyword'>if</span> (power==-1)</td></tr>
+<tr><td class="num" id="LN72">72</td><td class="line">			errx(1, <span class='string_literal'>"Invalid suffix: '%c'"</span>, *endptr);</td></tr>
+<tr><td class="num" id="LN73">73</td><td class="line">		endptr++;</td></tr>
+<tr><td class="num" id="LN74">74</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN75">75</td><td class="line">		<span class='keyword'>if</span> (*endptr=='i') {</td></tr>
+<tr><td class="num" id="LN76">76</td><td class="line">			++endptr;</td></tr>
+<tr><td class="num" id="LN77">77</td><td class="line">			base = 1024;</td></tr>
+<tr><td class="num" id="LN78">78</td><td class="line">		}</td></tr>
+<tr><td class="num" id="LN79">79</td><td class="line">		d = d * powl(base,power);</td></tr>
+<tr><td class="num" id="LN80">80</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN81">81</td><td class="line">		<span class='keyword'>if</span> (*endptr != '\0')</td></tr>
+<tr><td class="num" id="LN82">82</td><td class="line">			errx(1, <span class='string_literal'>"Extra characters found: '%s'"</span>, endptr);</td></tr>
+<tr><td class="num" id="LN83">83</td><td class="line">	}</td></tr>
+<tr><td class="num" id="LN84">84</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN85">85</td><td class="line">	<span class='keyword'>return</span> d;</td></tr>
+<tr><td class="num" id="LN86">86</td><td class="line">}</td></tr>
+<tr><td class="num" id="LN87">87</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN88">88</td><td class="line"><span class='keyword'>long</span> <span class='keyword'>int</span> safe_string_to_long(<span class='keyword'>const</span> <span class='keyword'>char</span>* str)</td></tr>
+<tr><td class="num" id="LN89">89</td><td class="line">{</td></tr>
+<tr><td class="num" id="LN90">90</td><td class="line">	<span class='keyword'>char</span> *endptr;</td></tr>
+<tr><td class="num" id="LN91">91</td><td class="line">	<span class='keyword'>long</span> <span class='keyword'>int</span> val;</td></tr>
+<tr><td class="num" id="LN92">92</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN93">93</td><td class="line">	<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span> = 0;    <span class='comment'>/* To distinguish success/failure after call */</span></td></tr>
+<tr><td class="num" id="LN94">94</td><td class="line">	val = strtol(str, &amp;endptr, 10);</td></tr>
+<tr><td class="num" id="LN95">95</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN96">96</td><td class="line">	<span class='comment'>/* Check for various possible errors */</span></td></tr>
+<tr><td class="num" id="LN97">97</td><td class="line">	fprintf(<span class='macro'>stderr<span class='expansion'>stderr</span></span>,<span class='string_literal'>"errno=%d   val=%ld\n"</span>,<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span>,val);</td></tr>
+<tr><td class="num" id="LN98">98</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN99">99</td><td class="line">	<span class='comment'>/* Coverage note: This 2-line "if" statement has multiple conditions</span></td></tr>
+<tr><td class="num" id="LN100">100</td><td class="line">	 <span class='comment'>* (=branches). Not all of them can be ever tested in this situation.</span></td></tr>
+<tr><td class="num" id="LN101">101</td><td class="line">	 <span class='comment'>* For example:</span></td></tr>
+<tr><td class="num" id="LN102">102</td><td class="line">	 <span class='comment'>*  The only documented ERRNO other than ERANGE is EINVAL,</span></td></tr>
+<tr><td class="num" id="LN103">103</td><td class="line">	 <span class='comment'>*  which happens only if 'base' is not 10 - will never happen in this</span></td></tr>
+<tr><td class="num" id="LN104">104</td><td class="line">	 <span class='comment'>*  program. so either accept less than 100% (but keep the safest</span></td></tr>
+<tr><td class="num" id="LN105">105</td><td class="line">	 <span class='comment'>*  error checking statement), or change the code.</span></td></tr>
+<tr><td class="num" id="LN106">106</td><td class="line">	 <span class='comment'>*  */</span></td></tr>
+<tr><td class="num" id="LN107">107</td><td class="line">	<span class='keyword'>if</span> ((<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span> == <span class='macro'>ERANGE<span class='expansion'>34</span></span> &amp;&amp; (val == <span class='macro'>LONG_MAX<span class='expansion'>9223372036854775807L</span></span> || val == <span class='macro'>LONG_MIN<span class='expansion'>(-9223372036854775807L -1L)</span></span>))</td></tr>
+<tr><td class="num" id="LN108">108</td><td class="line">			|| (<span class='macro'>errno<span class='expansion'>(*__errno_location ())</span></span> != 0 &amp;&amp; val == 0))</td></tr>
+<tr><td class="num" id="LN109">109</td><td class="line">		err(1,<span class='string_literal'>"strtol('%s') failed:"</span>, str);</td></tr>
+<tr><td class="num" id="LN110">110</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN111">111</td><td class="line">	<span class='keyword'>if</span> (endptr == str)</td></tr>
+<tr><td class="num" id="LN112">112</td><td class="line">		errx(1, <span class='string_literal'>"No digits were found in '%s'"</span>, str);</td></tr>
+<tr><td class="num" id="LN113">113</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN114">114</td><td class="line">	<span class='keyword'>if</span> (*endptr != '\0')</td></tr>
+<tr><td class="num" id="LN115">115</td><td class="line">	        errx(1, <span class='string_literal'>"Extra characters found: '%s'"</span>, endptr);</td></tr>
+<tr><td class="num" id="LN116">116</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN117">117</td><td class="line">	<span class='keyword'>return</span> 0;</td></tr>
+<tr><td class="num" id="LN118">118</td><td class="line">}</td></tr>
+<tr><td class="num" id="LN119">119</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN120">120</td><td class="line"><span class='keyword'>int</span> main(<span class='keyword'>int</span> argc, <span class='keyword'>char</span>* argv[])</td></tr>
+<tr><td class="num" id="LN121">121</td><td class="line">{</td></tr>
+<tr><td class="num" id="LN122">122</td><td class="line">	<span class='keyword'>enum</span> conv_type ct = USE_NONE ;</td></tr>
+<tr><td class="num" id="LN123">123</td><td class="line">	<span class='keyword'>int</span> c;</td></tr>
+<tr><td class="num" id="LN124">124</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN125">125</td><td class="line">	<span class='keyword'>while</span> ( (c=getopt(argc,argv,<span class='string_literal'>"hdl"</span>))!= -1 )</td></tr>
+<tr><td class="num" id="LN126">126</td><td class="line">	{</td></tr>
+<tr><td class="num" id="LN127">127</td><td class="line">		<span class='keyword'>switch</span>(c)</td></tr>
+<tr><td class="num" id="LN128">128</td><td class="line">		{</td></tr>
+<tr><td class="num" id="LN129">129</td><td class="line">		<span class='keyword'>case</span> 'd':</td></tr>
+<tr><td class="num" id="LN130">130</td><td class="line">			ct = USE_DOUBLE;</td></tr>
+<tr><td class="num" id="LN131">131</td><td class="line">			<span class='keyword'>break</span>;</td></tr>
+<tr><td class="num" id="LN132">132</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN133">133</td><td class="line">		<span class='keyword'>case</span> 'l':</td></tr>
+<tr><td class="num" id="LN134">134</td><td class="line">			ct = USE_LONG;</td></tr>
+<tr><td class="num" id="LN135">135</td><td class="line">			<span class='keyword'>break</span>;</td></tr>
+<tr><td class="num" id="LN136">136</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN137">137</td><td class="line">		<span class='keyword'>case</span> 'h':</td></tr>
+<tr><td class="num" id="LN138">138</td><td class="line">			ct = USE_HUMAN;</td></tr>
+<tr><td class="num" id="LN139">139</td><td class="line">			<span class='keyword'>break</span>;</td></tr>
+<tr><td class="num" id="LN140">140</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN141">141</td><td class="line">		<span class='keyword'>default</span>:</td></tr>
+<tr><td class="num" id="LN142">142</td><td class="line">			errx(1,<span class='string_literal'>"unknown command-line option '%c'"</span>,c);</td></tr>
+<tr><td class="num" id="LN143">143</td><td class="line">			<span class='keyword'>break</span>;</td></tr>
+<tr><td class="num" id="LN144">144</td><td class="line">		}</td></tr>
+<tr><td class="num" id="LN145">145</td><td class="line">	}</td></tr>
+<tr><td class="num" id="LN146">146</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN147">147</td><td class="line">	<span class='keyword'>if</span> (ct==USE_NONE)</td></tr>
+<tr><td class="num" id="LN148">148</td><td class="line">		errx(1,<span class='string_literal'>"error: no type specified (-d/-l)"</span>);</td></tr>
+<tr><td class="num" id="LN149">149</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN150">150</td><td class="line">	<span class='keyword'>if</span> (optind==argc)</td></tr>
+<tr><td class="num" id="LN151">151</td><td class="line">		errx(1,<span class='string_literal'>"error: no values specified"</span>);</td></tr>
+<tr><td class="num" id="LN152">152</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN153">153</td><td class="line">	<span class='keyword'>for</span> (<span class='keyword'>int</span> i=optind;i&lt;argc;++i)</td></tr>
+<tr><td class="num" id="LN154">154</td><td class="line">	{</td></tr>
+<tr><td class="num" id="LN155">155</td><td class="line">		<span class='keyword'>const</span> <span class='keyword'>char</span>* str = argv[i];</td></tr>
+<tr><td class="num" id="LN156">156</td><td class="line">		<span class='keyword'>long</span> <span class='keyword'>double</span> d;</td></tr>
+<tr><td class="num" id="LN157">157</td><td class="line">		<span class='keyword'>long</span> <span class='keyword'>int</span> l;</td></tr>
+<tr><td class="num" id="LN158">158</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN159">159</td><td class="line">		<span class='keyword'>switch</span> (ct)</td></tr>
+<tr><td class="num" id="LN160">160</td><td class="line">		{</td></tr>
+<tr><td class="num" id="LN161">161</td><td class="line">		<span class='keyword'>case</span> USE_HUMAN:</td></tr>
+<tr><td class="num" id="LN162">162</td><td class="line">		<span class='keyword'>case</span> USE_DOUBLE:</td></tr>
+<tr><td class="num" id="LN163">163</td><td class="line">			d = safe_string_to_double(str,(ct==USE_HUMAN));</td></tr>
+<tr><td class="num" id="LN164">164</td><td class="line">			printf(<span class='string_literal'>"%Lf\n"</span>, d);</td></tr>
+<tr><td class="num" id="LN165">165</td><td class="line">			<span class='keyword'>break</span>;</td></tr>
+<tr><td class="num" id="LN166">166</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN167">167</td><td class="line">		<span class='keyword'>case</span> USE_LONG:</td></tr>
+<tr><td class="num" id="LN168">168</td><td class="line">			l = safe_string_to_long(str);</td></tr>
+<tr><td class="num" id="LN169">169</td><td class="line">			printf(<span class='string_literal'>"%ld\n"</span>, l);</td></tr>
+<tr><td class="num" id="LN170">170</td><td class="line">			<span class='keyword'>break</span>;</td></tr>
+<tr><td class="num" id="LN171">171</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN172">172</td><td class="line">		<span class='keyword'>case</span> USE_NONE:</td></tr>
+<tr><td class="num" id="LN173">173</td><td class="line">			<span class='comment'>/* Coverage note: this point will never be reached, and</span></td></tr>
+<tr><td class="num" id="LN174">174</td><td class="line">			   <span class='comment'>never be covered (because USE_NONE is checked above).</span></td></tr>
+<tr><td class="num" id="LN175">175</td><td class="line">			   <span class='comment'>But the 'case' is required to avoid GCC warnings. */</span></td></tr>
+<tr><td class="num" id="LN176">176</td><td class="line">			abort();</td></tr>
+<tr><td class="num" id="LN177">177</td><td class="line">		}</td></tr>
+<tr><td class="num" id="LN178">178</td><td class="line">	}</td></tr>
+<tr><td class="num" id="LN179">179</td><td class="line"> </td></tr>
+<tr><td class="num" id="LN180">180</td><td class="line">	<span class='keyword'>return</span> 0;</td></tr>
+<tr><td class="num" id="LN181">181</td><td class="line">}</td></tr>
+</table></body></html>

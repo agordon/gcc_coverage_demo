@@ -1,0 +1,784 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - conv_test - /home/gordon/projects/lcov_learn/conv.c</title>
+<style type="text/css">
+/* All views: initial background and text color */
+body
+{
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+/* All views: standard link format*/
+a:link
+{
+  color: #284FA8;
+  text-decoration: underline;
+}
+
+/* All views: standard link - visited format */
+a:visited
+{
+  color: #00CB40;
+  text-decoration: underline;
+}
+
+/* All views: standard link - activated format */
+a:active
+{
+  color: #FF0040;
+  text-decoration: underline;
+}
+
+/* All views: main title format */
+td.title
+{
+  text-align: center;
+  padding-bottom: 10px;
+  font-family: sans-serif;
+  font-size: 20pt;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* All views: header item format */
+td.headerItem
+{
+  text-align: right;
+  padding-right: 6px;
+  font-family: sans-serif;
+  font-weight: bold;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+/* All views: header item value format */
+td.headerValue
+{
+  text-align: left;
+  color: #284FA8;
+  font-family: sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* All views: header item coverage table heading */
+td.headerCovTableHead
+{
+  text-align: center;
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-bottom: 0px;
+  font-family: sans-serif;
+  font-size: 80%;
+  white-space: nowrap;
+}
+
+/* All views: header item coverage table entry */
+td.headerCovTableEntry
+{
+  text-align: right;
+  color: #284FA8;
+  font-family: sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 4px;
+  background-color: #DAE7FE;
+}
+
+/* All views: header item coverage table entry for high coverage rate */
+td.headerCovTableEntryHi
+{
+  text-align: right;
+  color: #000000;
+  font-family: sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 4px;
+  background-color: #A7FC9D;
+}
+
+/* All views: header item coverage table entry for medium coverage rate */
+td.headerCovTableEntryMed
+{
+  text-align: right;
+  color: #000000;
+  font-family: sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 4px;
+  background-color: #FFEA20;
+}
+
+/* All views: header item coverage table entry for ow coverage rate */
+td.headerCovTableEntryLo
+{
+  text-align: right;
+  color: #000000;
+  font-family: sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 4px;
+  background-color: #FF0000;
+}
+
+/* All views: header legend value for legend entry */
+td.headerValueLeg
+{
+  text-align: left;
+  color: #000000;
+  font-family: sans-serif;
+  font-size: 80%;
+  white-space: nowrap;
+  padding-top: 4px;
+}
+
+/* All views: color of horizontal ruler */
+td.ruler
+{
+  background-color: #6688D4;
+}
+
+/* All views: version string format */
+td.versionInfo
+{
+  text-align: center;
+  padding-top: 2px;
+  font-family: sans-serif;
+  font-style: italic;
+}
+
+/* Directory view/File view (all)/Test case descriptions:
+   table headline format */
+td.tableHead
+{
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #6688D4;
+  font-family: sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+span.tableHeadSort
+{
+  padding-right: 4px;
+}
+
+/* Directory view/File view (all): filename entry format */
+td.coverFile
+{
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 20px; 
+  color: #284FA8;
+  background-color: #DAE7FE;
+  font-family: monospace;
+}
+
+/* Directory view/File view (all): bar-graph entry format*/
+td.coverBar
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #DAE7FE;
+}
+
+/* Directory view/File view (all): bar-graph outline color */
+td.coverBarOutline
+{
+  background-color: #000000;
+}
+
+/* Directory view/File view (all): percentage entry for files with
+   high coverage rate */
+td.coverPerHi
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #A7FC9D;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* Directory view/File view (all): line count entry for files with
+   high coverage rate */
+td.coverNumHi
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #A7FC9D;
+  white-space: nowrap;
+  font-family: sans-serif;
+}
+
+/* Directory view/File view (all): percentage entry for files with
+   medium coverage rate */
+td.coverPerMed
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #FFEA20;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* Directory view/File view (all): line count entry for files with
+   medium coverage rate */
+td.coverNumMed
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #FFEA20;
+  white-space: nowrap;
+  font-family: sans-serif;
+}
+
+/* Directory view/File view (all): percentage entry for files with
+   low coverage rate */
+td.coverPerLo
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #FF0000;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* Directory view/File view (all): line count entry for files with
+   low coverage rate */
+td.coverNumLo
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #FF0000;
+  white-space: nowrap;
+  font-family: sans-serif;
+}
+
+/* File view (all): "show/hide details" link format */
+a.detail:link
+{
+  color: #B8D0FF;
+  font-size:80%;
+}
+
+/* File view (all): "show/hide details" link - visited format */
+a.detail:visited
+{
+  color: #B8D0FF;
+  font-size:80%;
+}
+
+/* File view (all): "show/hide details" link - activated format */
+a.detail:active
+{
+  color: #FFFFFF;
+  font-size:80%;
+}
+
+/* File view (detail): test name entry */
+td.testName
+{
+  text-align: right;
+  padding-right: 10px;
+  background-color: #DAE7FE;
+  font-family: sans-serif;
+}
+
+/* File view (detail): test percentage entry */
+td.testPer
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px; 
+  background-color: #DAE7FE;
+  font-family: sans-serif;
+}
+
+/* File view (detail): test lines count entry */
+td.testNum
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px; 
+  background-color: #DAE7FE;
+  font-family: sans-serif;
+}
+
+/* Test case descriptions: test name format*/
+dt
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+/* Test case descriptions: description table body */
+td.testDescription
+{
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  background-color: #DAE7FE;
+}
+
+/* Source code view: function entry */
+td.coverFn
+{
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 20px; 
+  color: #284FA8;
+  background-color: #DAE7FE;
+  font-family: monospace;
+}
+
+/* Source code view: function entry zero count*/
+td.coverFnLo
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #FF0000;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* Source code view: function entry nonzero count*/
+td.coverFnHi
+{
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #DAE7FE;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* Source code view: source code format */
+pre.source
+{
+  font-family: monospace;
+  white-space: pre;
+  margin-top: 2px;
+}
+
+/* Source code view: line number format */
+span.lineNum
+{
+  background-color: #EFE383;
+}
+
+/* Source code view: format for lines which were executed */
+td.lineCov,
+span.lineCov
+{
+  background-color: #CAD7FE;
+}
+
+/* Source code view: format for Cov legend */
+span.coverLegendCov
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  background-color: #CAD7FE;
+}
+
+/* Source code view: format for lines which were not executed */
+td.lineNoCov,
+span.lineNoCov
+{
+  background-color: #FF6230;
+}
+
+/* Source code view: format for NoCov legend */
+span.coverLegendNoCov
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  background-color: #FF6230;
+}
+
+/* Source code view (function table): standard link - visited format */
+td.lineNoCov > a:visited,
+td.lineCov > a:visited
+{  
+  color: black;
+  text-decoration: underline;
+}  
+
+/* Source code view: format for lines which were executed only in a
+   previous version */
+span.lineDiffCov
+{
+  background-color: #B5F7AF;
+}
+
+/* Source code view: format for branches which were executed
+ * and taken */
+span.branchCov
+{
+  background-color: #CAD7FE;
+}
+
+/* Source code view: format for branches which were executed
+ * but not taken */
+span.branchNoCov
+{
+  background-color: #FF6230;
+}
+
+/* Source code view: format for branches which were not executed */
+span.branchNoExec
+{
+  background-color: #FF6230;
+}
+
+/* Source code view: format for the source code heading line */
+pre.sourceHeading
+{
+  white-space: pre;
+  font-family: monospace;
+  font-weight: bold;
+  margin: 0px;
+}
+
+/* All views: header legend value for low rate */
+td.headerValueLegL
+{
+  font-family: sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  padding-left: 4px;
+  padding-right: 2px;
+  background-color: #FF0000;
+  font-size: 80%;
+}
+
+/* All views: header legend value for med rate */
+td.headerValueLegM
+{
+  font-family: sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: #FFEA20;
+  font-size: 80%;
+}
+
+/* All views: header legend value for hi rate */
+td.headerValueLegH
+{
+  font-family: sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  padding-left: 2px;
+  padding-right: 4px;
+  background-color: #A7FC9D;
+  font-size: 80%;
+}
+
+/* All views except source code view: legend format for low coverage */
+span.coverLegendCovLo
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  background-color: #FF0000;
+}
+
+/* All views except source code view: legend format for med coverage */
+span.coverLegendCovMed
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  background-color: #FFEA20;
+}
+
+/* All views except source code view: legend format for hi coverage */
+span.coverLegendCovHi
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  background-color: #A7FC9D;
+}
+</style>
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">home/gordon/projects/lcov_learn</a> - conv.c<span style="font-size: 80%;"> (source / <a href="conv.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">conv_test</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntry">71</td>
+            <td class="headerCovTableEntryLo">56.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2012-12-28</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryMed">75.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">54</td>
+            <td class="headerCovTableEntryLo">33.3 %</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /* GCC+Coverage demo.</a>
+<span class="lineNum">       2 </span>                :            :  *
+<span class="lineNum">       3 </span>                :            :  * Copyright 2012 (C) Assaf Gordon
+<span class="lineNum">       4 </span>                :            :  * License: AGPLv3+
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * See README.md file for details.
+<span class="lineNum">       7 </span>                :            :  */
+<span class="lineNum">       8 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">       9 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      10 </span>                :            : #include &lt;err.h&gt;
+<span class="lineNum">      11 </span>                :            : #include &lt;errno.h&gt;
+<span class="lineNum">      12 </span>                :            : #include &lt;getopt.h&gt;
+<span class="lineNum">      13 </span>                :            : #include &lt;limits.h&gt;
+<span class="lineNum">      14 </span>                :            : #include &lt;math.h&gt;
+<span class="lineNum">      15 </span>                :            : 
+<span class="lineNum">      16 </span>                :            : enum conv_type
+<span class="lineNum">      17 </span>                :            : {
+<span class="lineNum">      18 </span>                :            :         USE_NONE,
+<span class="lineNum">      19 </span>                :            :         USE_DOUBLE,
+<span class="lineNum">      20 </span>                :            :         USE_LONG,
+<span class="lineNum">      21 </span>                :            :         USE_HUMAN
+<a name="22"><span class="lineNum">      22 </span>                :            : };</a>
+<span class="lineNum">      23 </span>                :            : 
+<span class="lineNum">      24 </span>                :<span class="lineNoCov">          0 : int suffix_power(const char suf)</span>
+<span class="lineNum">      25 </span>                :            : {
+<span class="lineNum">      26 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span> :<span class="lineNoCov">          0 :         switch (suf)</span>
+<span class="lineNum">         </span>         <span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">      27 </span>                :            :         {
+<span class="lineNum">      28 </span>                :<span class="lineNoCov">          0 :         case 'K': return 1;</span>
+<span class="lineNum">      29 </span>                :<span class="lineNoCov">          0 :         case 'M': return 2;</span>
+<span class="lineNum">      30 </span>                :<span class="lineNoCov">          0 :         case 'G': return 3;</span>
+<span class="lineNum">      31 </span>                :<span class="lineNoCov">          0 :         case 'T': return 4;</span>
+<span class="lineNum">      32 </span>                :<span class="lineNoCov">          0 :         case 'P': return 5;</span>
+<span class="lineNum">      33 </span>                :<span class="lineNoCov">          0 :         default: return -1;</span>
+<span class="lineNum">      34 </span>                :            :         }
+<a name="35"><span class="lineNum">      35 </span>                :            : }</a>
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :<span class="lineCov">          2 : long double safe_string_to_double(const char* str, int allow_human_suffix)</span>
+<span class="lineNum">      38 </span>                :            : {
+<span class="lineNum">      39 </span>                :            :         char *endptr;
+<span class="lineNum">      40 </span>                :            :         long double d;
+<span class="lineNum">      41 </span>                :<span class="lineCov">          2 :         int power=0;</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">          2 :         int base=1000;</span>
+<span class="lineNum">      43 </span>                :            : 
+<span class="lineNum">      44 </span>                :<span class="lineCov">          2 :         d = 42 ; /* this harmless but useless assignment should be detected</span>
+<span class="lineNum">      45 </span>                :            :                     by clang static code analyzer */
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :<span class="lineCov">          2 :         errno = 0;    /* To distinguish success/failure after call */</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">          2 :         d = strtod(str, &amp;endptr);</span>
+<span class="lineNum">      49 </span>                :            : 
+<span class="lineNum">      50 </span>                :            :         /* Coverage note: This 2-line &quot;if&quot; statement has multiple conditions
+<span class="lineNum">      51 </span>                :            :          * (=branches). Not all of them can be ever tested in this situation.
+<span class="lineNum">      52 </span>                :            :          * For example:
+<span class="lineNum">      53 </span>                :            :          *  It is unclear if a &quot;libc&quot; implementation of &quot;strtod&quot;
+<span class="lineNum">      54 </span>                :            :          *  returns errors other than ERANGE.
+<span class="lineNum">      55 </span>                :            :          *  This error checking code is based on the linux man-page
+<span class="lineNum">      56 </span>                :            :          *  if stdtod(3) - we keep it here for completeness,
+<span class="lineNum">      57 </span>                :            :          *  but this will reduce the maximum possible coverage.
+<span class="lineNum">      58 </span>                :            :          *  */
+<span class="lineNum">      59 </span>        [<span class="branchCov" title="Branch 1 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          2 :         if ((errno == ERANGE)</span>
+<span class="lineNum">      60 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 2 times"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          2 :                         || (errno != 0 &amp;&amp; d == 0))</span>
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 :                 err(1,&quot;strtod('%s') failed:&quot;, str);</span>
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          2 :         if (endptr == str)</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :                 errx(1, &quot;No digits were found in '%s'&quot;, str);</span>
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          2 :         if (*endptr != '\0') {</span>
+<span class="lineNum">      67 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (!allow_human_suffix)</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :                         errx(1, &quot;Extra characters found: '%s'&quot;, endptr);</span>
+<span class="lineNum">      69 </span>                :            : 
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :                 power = suffix_power(*endptr);</span>
+<span class="lineNum">      71 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (power==-1)</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :                         errx(1, &quot;Invalid suffix: '%c'&quot;, *endptr);</span>
+<span class="lineNum">      73 </span>                :<span class="lineNoCov">          0 :                 endptr++;</span>
+<span class="lineNum">      74 </span>                :            : 
+<span class="lineNum">      75 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (*endptr=='i') {</span>
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 :                         ++endptr;</span>
+<span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 :                         base = 1024;</span>
+<span class="lineNum">      78 </span>                :            :                 }
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 :                 d = d * powl(base,power);</span>
+<span class="lineNum">      80 </span>                :            : 
+<span class="lineNum">      81 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if (*endptr != '\0')</span>
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 :                         errx(1, &quot;Extra characters found: '%s'&quot;, endptr);</span>
+<span class="lineNum">      83 </span>                :            :         }
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :<span class="lineCov">          2 :         return d;</span>
+<a name="86"><span class="lineNum">      86 </span>                :            : }</a>
+<span class="lineNum">      87 </span>                :            : 
+<span class="lineNum">      88 </span>                :<span class="lineCov">          1 : long int safe_string_to_long(const char* str)</span>
+<span class="lineNum">      89 </span>                :            : {
+<span class="lineNum">      90 </span>                :            :         char *endptr;
+<span class="lineNum">      91 </span>                :            :         long int val;
+<span class="lineNum">      92 </span>                :            : 
+<span class="lineNum">      93 </span>                :<span class="lineCov">          1 :         errno = 0;    /* To distinguish success/failure after call */</span>
+<span class="lineNum">      94 </span>                :<span class="lineCov">          1 :         val = strtol(str, &amp;endptr, 10);</span>
+<span class="lineNum">      95 </span>                :            : 
+<span class="lineNum">      96 </span>                :            :         /* Check for various possible errors */
+<span class="lineNum">      97 </span>                :<span class="lineCov">          1 :         fprintf(stderr,&quot;errno=%d   val=%ld\n&quot;,errno,val);</span>
+<span class="lineNum">      98 </span>                :            : 
+<span class="lineNum">      99 </span>                :            :         /* Coverage note: This 2-line &quot;if&quot; statement has multiple conditions
+<span class="lineNum">     100 </span>                :            :          * (=branches). Not all of them can be ever tested in this situation.
+<span class="lineNum">     101 </span>                :            :          * For example:
+<span class="lineNum">     102 </span>                :            :          *  The only documented ERRNO other than ERANGE is EINVAL,
+<span class="lineNum">     103 </span>                :            :          *  which happens only if 'base' is not 10 - will never happen in this
+<span class="lineNum">     104 </span>                :            :          *  program. so either accept less than 100% (but keep the safest
+<span class="lineNum">     105 </span>                :            :          *  error checking statement), or change the code.
+<span class="lineNum">     106 </span>                :            :          *  */
+<span class="lineNum">     107 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 1 time"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          1 :         if ((errno == ERANGE &amp;&amp; (val == LONG_MAX || val == LONG_MIN))</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">     108 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 1 time"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          1 :                         || (errno != 0 &amp;&amp; val == 0))</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :                 err(1,&quot;strtol('%s') failed:&quot;, str);</span>
+<span class="lineNum">     110 </span>                :            : 
+<span class="lineNum">     111 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :         if (endptr == str)</span>
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :                 errx(1, &quot;No digits were found in '%s'&quot;, str);</span>
+<span class="lineNum">     113 </span>                :            : 
+<span class="lineNum">     114 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :         if (*endptr != '\0')</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 :                 errx(1, &quot;Extra characters found: '%s'&quot;, endptr);</span>
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :<span class="lineCov">          1 :         return 0;</span>
+<a name="118"><span class="lineNum">     118 </span>                :            : }</a>
+<span class="lineNum">     119 </span>                :            : 
+<span class="lineNum">     120 </span>                :<span class="lineCov">          3 : int main(int argc, char* argv[])</span>
+<span class="lineNum">     121 </span>                :            : {
+<span class="lineNum">     122 </span>                :<span class="lineCov">          3 :         enum conv_type ct = USE_NONE ;</span>
+<span class="lineNum">     123 </span>                :            :         int c;
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">          6 :         while ( (c=getopt(argc,argv,&quot;hdl&quot;))!= -1 )</span>
+<span class="lineNum">     126 </span>                :            :         {
+<span class="lineNum">     127 </span>  [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">          3 :                 switch(c)</span>
+<span class="lineNum">     128 </span>                :            :                 {
+<span class="lineNum">     129 </span>                :            :                 case 'd':
+<span class="lineNum">     130 </span>                :<span class="lineCov">          2 :                         ct = USE_DOUBLE;</span>
+<span class="lineNum">     131 </span>                :<span class="lineCov">          2 :                         break;</span>
+<span class="lineNum">     132 </span>                :            : 
+<span class="lineNum">     133 </span>                :            :                 case 'l':
+<span class="lineNum">     134 </span>                :<span class="lineCov">          1 :                         ct = USE_LONG;</span>
+<span class="lineNum">     135 </span>                :<span class="lineCov">          1 :                         break;</span>
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :            :                 case 'h':
+<span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 :                         ct = USE_HUMAN;</span>
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     140 </span>                :            : 
+<span class="lineNum">     141 </span>                :            :                 default:
+<span class="lineNum">     142 </span>                :<span class="lineNoCov">          0 :                         errx(1,&quot;unknown command-line option '%c'&quot;,c);</span>
+<span class="lineNum">     143 </span>                :            :                         break;
+<span class="lineNum">     144 </span>                :            :                 }
+<span class="lineNum">     145 </span>                :            :         }
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :         if (ct==USE_NONE)</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :                 errx(1,&quot;error: no type specified (-d/-l)&quot;);</span>
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :         if (optind==argc)</span>
+<span class="lineNum">     151 </span>                :<span class="lineNoCov">          0 :                 errx(1,&quot;error: no values specified&quot;);</span>
+<span class="lineNum">     152 </span>                :            : 
+<span class="lineNum">     153 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          6 :         for (int i=optind;i&lt;argc;++i)</span>
+<span class="lineNum">     154 </span>                :            :         {
+<span class="lineNum">     155 </span>                :<span class="lineCov">          3 :                 const char* str = argv[i];</span>
+<span class="lineNum">     156 </span>                :            :                 long double d;
+<span class="lineNum">     157 </span>                :            :                 long int l;
+<span class="lineNum">     158 </span>                :            : 
+<span class="lineNum">     159 </span>  [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">          3 :                 switch (ct)</span>
+<span class="lineNum">     160 </span>                :            :                 {
+<span class="lineNum">     161 </span>                :            :                 case USE_HUMAN:
+<span class="lineNum">     162 </span>                :            :                 case USE_DOUBLE:
+<span class="lineNum">     163 </span>                :<span class="lineCov">          2 :                         d = safe_string_to_double(str,(ct==USE_HUMAN));</span>
+<span class="lineNum">     164 </span>                :<span class="lineCov">          2 :                         printf(&quot;%Lf\n&quot;, d);</span>
+<span class="lineNum">     165 </span>                :<span class="lineCov">          2 :                         break;</span>
+<span class="lineNum">     166 </span>                :            : 
+<span class="lineNum">     167 </span>                :            :                 case USE_LONG:
+<span class="lineNum">     168 </span>                :<span class="lineCov">          1 :                         l = safe_string_to_long(str);</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">          1 :                         printf(&quot;%ld\n&quot;, l);</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">          1 :                         break;</span>
+<span class="lineNum">     171 </span>                :            : 
+<span class="lineNum">     172 </span>                :            :                 case USE_NONE:
+<span class="lineNum">     173 </span>                :            :                         /* Coverage note: this point will never be reached, and
+<span class="lineNum">     174 </span>                :            :                            never be covered (because USE_NONE is checked above).
+<span class="lineNum">     175 </span>                :            :                            But the 'case' is required to avoid GCC warnings. */
+<span class="lineNum">     176 </span>                :<span class="lineNoCov">          0 :                         abort();</span>
+<span class="lineNum">     177 </span>                :            :                 }
+<span class="lineNum">     178 </span>                :            :         }
+<span class="lineNum">     179 </span>                :            : 
+<span class="lineNum">     180 </span>                :<span class="lineCov">          3 :         return 0;</span>
+<span class="lineNum">     181 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
